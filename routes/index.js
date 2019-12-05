@@ -1,5 +1,5 @@
 import express from 'express';
-import ProfileController from '../controllers/ProfileController';
+import profileController from '../controllers/ProfileController';
 
 const router = express.Router();
 
@@ -11,6 +11,9 @@ router.get('/', (req, res) => {
 	});
 });
 
-
+// Profile routes
+router.get(API_ROUTE + 'profiles/', profileController.getAllProfiles);
+router.post(API_ROUTE + 'profile/create', profileController.createProfile);
+router.post(API_ROUTE + 'profile/update', profileController.updateProfile);
 
 export default router;
