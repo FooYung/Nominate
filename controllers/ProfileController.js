@@ -72,4 +72,6 @@ class ProfileController {
 	}
 }
 
+// Added comments for change acknowledgement because git is dogshit
+
 export default new ProfileController();
