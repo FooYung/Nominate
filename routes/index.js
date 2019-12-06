@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
 
 // Profile routes
 router.get(API_ROUTE + 'profiles/', profileController.getAllProfiles);
-router.post(API_ROUTE + 'profile/create', profileController.createProfile);
-router.post(API_ROUTE + 'profile/update', profileController.updateProfile);
+router.get(API_ROUTE + 'profiles/:id', profileController.getProfile);
+router.post(API_ROUTE + 'profiles/', profileController.createProfile);
+router.put(API_ROUTE + 'profiles/', profileController.updateProfile);
+router.delete(API_ROUTE + 'profiles/', profileController.deleteProfile);
 
 export default router;

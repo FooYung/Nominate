@@ -11,7 +11,7 @@ const profileSchema = new Schema({
 		required: true
 	},
 	avatarSrc: {
-		type: String,
+		type: String
 	}
 });
 

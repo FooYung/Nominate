@@ -12,8 +12,17 @@ class ProfileController {
 	}
 
 	async getProfile(req, res) {
-		return res.status(400).send({
-			message: 'no current implementation'
+		const id = req.params.id;
+		console.log(id);
+		
+		if (!id) {
+			res.status(400).send({message: 'id was null'});
+		}
+
+		await Profile.findOne({_id: id}, (err, result) => {
+			if (err) res.status(500).send(err);
+			
+			res.status(200).send(result);
 		});
 	}
 
@@ -21,7 +30,7 @@ class ProfileController {
 		const profile = new Profile({
 			firstname: req.body.firstname,
 			lastname: req.body.lastname,
-			avatarSrc: req.body.avatar
+			avatarSrc: req.body.avatarSrc
 		});
 
 		await profile.save((err, response) => {
@@ -37,24 +46,28 @@ class ProfileController {
 		if (!id)
 			res.status(500).send('provided id was null.');
 
-		let profile = Profile.findOne({_id: req.body.id}, function (err, result) {
+		const updateObj = {
+			firstname: req.body.firstname,
+			lastname: req.body.lastname,
+			avatarSrc: req.body.avatarSrc
+		}
+
+		await Profile.findOneAndUpdate({_id: id}, updateObj, function (err, result) {
 			if (err) res.status(500).send(err);
 
-			//profile.firstname = req.body.firstname;
-			//profile.lastname = req.body.lastname;
-			//profile.avatarSrc = req.body.avatarSrc;
-
-			console.log(result);
+			res.status(200).send(result);
 		});
-
-		console.log(profile);
-
-		
 	}
 
-	deleteProfile(req, res) {
-		return res.status(400).send({
-			message: 'no current implementation'
+	async deleteProfile(req, res) {
+		const id = req.body.id;
+
+		if(!id) res.status(400).send({message: 'profile not supplied.'});
+
+		await Profile.deleteOne({_id: id}, (err, result) => {
+			if (err) res.status(500).send(err);
+
+			res.status(200).send(result);
 		});
 	}
 }
