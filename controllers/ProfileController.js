@@ -11,7 +11,7 @@ class ProfileController {
 		});
 	}
 
-	async getProfile(req, res) {
+	async getProfileById(req, res) {
 		const id = req.params.id;
 		console.log(id);
 		
